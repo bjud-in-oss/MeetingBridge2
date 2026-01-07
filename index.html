@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gemini Live Transcriber</title>
+    
+    <!-- Console Cleaner: Tystar Tailwind CDN varning -->
+    <script>
+      (function() {
+        const originalWarn = console.warn;
+        console.warn = function(...args) {
+          if (args[0] && typeof args[0] === 'string' && args[0].includes('cdn.tailwindcss.com')) return;
+          originalWarn.apply(console, args);
+        };
+      })();
+    </script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- ES Module Shims: Critical for import maps -->
+    <script async src="https://ga.jspm.io/npm:es-module-shims@1.8.0/dist/es-module-shims.js"></script>
+    
+    <style>
+      body {
+        font-family: 'Inter', sans-serif;
+        background-color: #0f172a;
+        color: #f8fafc;
+        margin: 0;
+      }
+      #root { width: 100%; height: 100vh; }
+    </style>
+
+    <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@19.0.0?dev",
+    "react/jsx-runtime": "https://esm.sh/react@19.0.0/jsx-runtime?dev",
+    "react/jsx-dev-runtime": "https://esm.sh/react@19.0.0/jsx-dev-runtime?dev",
+    "react-dom": "https://esm.sh/react-dom@19.0.0?dev",
+    "react-dom/client": "https://esm.sh/react-dom@19.0.0/client?dev",
+    "@google/genai": "https://esm.run/@google/genai",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "fs": "https://esm.sh/fs@^0.0.1-security",
+    "path": "https://esm.sh/path@^0.12.7"
+  }
+}
+</script>
+    
+    <script>
+       window.process = { env: { NODE_ENV: 'development', API_KEY: '' } };
+       
+       window.addEventListener('error', (e) => {
+         // Filtrera bort resize-fel
+         if (e.message === 'ResizeObserver loop limit exceeded') return;
+
+         const root = document.getElementById('root');
+         if(root) {
+            if (!document.getElementById('error-display')) {
+                console.error("Global Error Caught:", e.error);
+            }
+         }
+       });
+    </script>
+  </head>
+  <body>
+    <div id="root">
+        <div style="height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; color: #94a3b8; font-family: sans-serif;">
+            <div class="animate-pulse flex flex-col items-center">
+                <div class="h-8 w-8 border-4 border-indigo-500 border-t-transparent rounded-full animate-spin mb-4"></div>
+                <div>Startar applikationen...</div>
+                <div style="font-size: 0.8em; opacity: 0.7; margin-top: 5px;">React 19 • Gemini Live</div>
+            </div>
+        </div>
+    </div>
+    <!-- ÄNDRING: Inline import löser problemet med att webbläsaren letar på fel domän -->
+    <script type="module">
+      import './index.tsx';
+    </script>
+  </body>
+</html>

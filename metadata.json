@@ -1,0 +1,7 @@
+{
+  "name": "Gemini Live text Transcriber and speach translator",
+  "description": "A long-form speech-to-text application capable of handling continuous speech sessions (20+ minutes) using Gemini Live API.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
